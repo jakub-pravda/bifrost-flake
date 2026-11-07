@@ -1,0 +1,21 @@
+name: "Periodic flake update"
+on:
+  workflow_dispatch:
+  schedule:
+    # Run every day at 12:00 AM (midnight)
+    - cron:  '0 0 * * *'
+jobs:
+  flake_update:
+    runs-on: ubuntu-24.04
+    steps:
+    - uses: actions/checkout@v5
+    - uses: cachix/install-nix-action@v31
+      with:
+        github_access_token: ${{ secrets.GITHUB_TOKEN }}
+    - run: nix flake update
+    - uses: EndBug/add-and-commit@v9
+      with:
+        add: 'flake.lock'
+        author_name: GitHub Actions
+        author_email: jacfal.tech@protonmail.com
+        message: "GitHub Actions: Update flake.lock"
