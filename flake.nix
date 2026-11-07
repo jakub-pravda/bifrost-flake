@@ -13,14 +13,14 @@
         nixpkgs.lib.genAttrs supportedSystems
           (system: f system (import nixpkgs { inherit system; }));
 
-      version = "1.6.0";
+      version = "2.5.0";
 
       # Static Go binary fetched directly from upstream download server.
       # To bump: change version, then for each arch run:
       #   nix store prefetch-file https://downloads.getmaxim.ai/bifrost/v<NEW>/linux/<arch>/bifrost-http
+      # Hashes for v2.5.0 - update these when bumping version
       sources = {
-        "x86_64-linux"  = { arch = "amd64"; hash = "sha256-vieIN5UVN/yAsgLqlRsRNUeN1UPo5SO9PyJ3NpvVNdY="; };
-        "aarch64-linux" = { arch = "arm64"; hash = "sha256-guLEHhNH77toOMWHzh8G/qT1sN6MxQqB4PvKE9NxuXk="; };
+        "x86_64-linux"  = { arch = "amd64"; hash = "sha256-1/lpfr9EP4+WHBx1HlgSMyCujHSRcOr2O2RV3U8f3i8="; };
       };
 
       bifrostFor = system: pkgs:
